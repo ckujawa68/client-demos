@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procopio's Pizza & Pasta | Authentic Italian – Vincennes, IN</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --dark: #1a1208;
+    --red: #c0392b;
+    --gold: #c9a84c;
+    --warm-gray: #e8e0d0;
+    --text-light: #6b5a3e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(26,18,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    animation: fadeDown 0.8s ease both;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none; font-weight: 400;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--red); color: white !important;
+    padding: 0.6rem 1.4rem; font-size: 0.75rem !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 5rem 5rem 6rem;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1.0;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--gold); display: block;
+  }
+  .hero-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; line-height: 1.7;
+    color: rgba(245,240,232,0.75);
+    max-width: 420px; margin-bottom: 3rem;
+  }
+  .hero-actions { display: flex; gap: 1.2rem; align-items: center; }
+  .btn-primary {
+    background: var(--red); color: white;
+    padding: 1rem 2.5rem; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #a93226; transform: translateY(-2px); }
+  .btn-outline {
+    color: var(--cream); border: 1px solid rgba(245,240,232,0.4);
+    padding: 1rem 2.2rem; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; font-weight: 400;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    animation: fadeIn 1.2s ease 0.5s both;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to right, var(--dark) 0%, transparent 30%),
+                linear-gradient(to top, var(--dark) 0%, transparent 25%);
+  }
+  .hero-img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.6) saturate(1.3);
+  }
+  .hero-badge {
+    position: absolute; bottom: 3rem; right: 3rem; z-index: 5;
+    background: var(--gold); color: var(--dark);
+    width: 120px; height: 120px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    animation: spin-slow 20s linear infinite;
+  }
+  .hero-badge-inner {
+    text-align: center;
+  }
+  .hero-badge-inner .num {
+    font-size: 2rem; font-weight: 900; line-height: 1;
+  }
+  .hero-badge-inner .label {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* DIVIDER */
+  .divider {
+    text-align: center; padding: 3rem 0;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: center; gap: 2rem;
+    overflow: hidden;
+  }
+  .divider-line { flex: 1; height: 1px; background: rgba(201,168,76,0.25); }
+  .divider-ornament {
+    color: var(--gold); font-size: 1.2rem; letter-spacing: 0.5em;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    background: var(--red);
+    padding: 4rem 6rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .strip-item { text-align: center; }
+  .strip-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: rgba(255,255,255,0.2);
+    line-height: 1;
+  }
+  .strip-label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 500; margin-top: 0.3rem;
+  }
+  .strip-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: rgba(255,255,255,0.8);
+    margin-top: 0.5rem;
+  }
+
+  /* MENU SECTION */
+  .menu-section {
+    padding: 8rem 6rem;
+    background: var(--dark);
+  }
+  .section-header { text-align: center; margin-bottom: 5rem; }
+  .section-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; color: rgba(245,240,232,0.6);
+    margin-top: 1rem;
+  }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .menu-card {
+    background: #221a0e;
+    padding: 2.5rem;
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: background 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+  .menu-card:hover {
+    background: #2a2010;
+    border-color: rgba(201,168,76,0.3);
+  }
+  .menu-card-icon {
+    font-size: 2rem; margin-bottom: 1rem;
+  }
+  .menu-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    margin-bottom: 0.8rem; color: var(--cream);
+  }
+  .menu-item {
+    display: flex; justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(245,240,232,0.07);
+    font-size: 0.9rem;
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item-name { color: rgba(245,240,232,0.85); }
+  .menu-item-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; color: rgba(245,240,232,0.45);
+    font-size: 0.85rem; margin-top: 0.1rem;
+  }
+
+  /* SPECIALTY BANNER */
+  .specialty {
+    background: #110d06;
+    padding: 7rem 6rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .specialty-text {}
+  .specialty-label {
+    font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1.5rem;
+  }
+  .specialty-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .specialty-title span { color: var(--gold); }
+  .specialty-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; line-height: 1.8;
+    color: rgba(245,240,232,0.7);
+    margin-bottom: 2rem;
+  }
+  .specialty-visual {
+    position: relative;
+  }
+  .specialty-box {
+    background: #221a0e;
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 3rem;
+  }
+  .specialty-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--gold); margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .specialty-list { list-style: none; }
+  .specialty-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(245,240,232,0.07);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    display: flex; align-items: center; gap: 1rem;
+    color: rgba(245,240,232,0.85);
+  }
+  .specialty-list li::before {
+    content: '✦'; color: var(--gold); font-size: 0.6rem;
+  }
+
+  /* TRAIL BADGE */
+  .trail-section {
+    background: var(--red);
+    padding: 4rem 6rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 4rem;
+    text-align: center;
+  }
+  .trail-icon { font-size: 3rem; }
+  .trail-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; margin-bottom: 0.5rem;
+  }
+  .trail-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; opacity: 0.85;
+  }
+
+  /* INFO / HOURS */
+  .info-section {
+    padding: 8rem 6rem;
+    background: #0e0b05;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+  .info-block {}
+  .info-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    margin-bottom: 2rem; color: var(--cream);
+  }
+  .hours-list { list-style: none; }
+  .hours-list li {
+    display: flex; justify-content: space-between;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+    font-size: 0.95rem;
+  }
+  .hours-list .day { color: rgba(245,240,232,0.5); letter-spacing: 0.05em; }
+  .hours-list .time { color: var(--cream); }
+  .hours-list .closed { color: var(--red); }
+  .contact-items { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+  }
+  .contact-icon {
+    font-size: 1.4rem; margin-top: 0.1rem;
+  }
+  .contact-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .contact-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--cream);
+  }
+  .contact-value a { color: inherit; text-decoration: none; }
+  .contact-value a:hover { color: var(--gold); }
+
+  /* REVIEWS */
+  .reviews-section {
+    padding: 8rem 6rem;
+    background: var(--dark);
+  }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; margin-top: 4rem;
+  }
+  .review-card {
+    background: #1a1208;
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .review-card::before {
+    content: '"';
+    position: absolute; top: 1rem; right: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem; color: rgba(201,168,76,0.08);
+    line-height: 1;
+  }
+  .review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; line-height: 1.7;
+    color: rgba(245,240,232,0.8);
+    margin-bottom: 1.5rem;
+  }
+  .review-author {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #060402;
+    padding: 4rem 6rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 2rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--gold); font-weight: 700;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; color: rgba(245,240,232,0.4);
+    margin-top: 0.3rem;
+  }
+  .footer-copy {
+    font-size: 0.75rem; color: rgba(245,240,232,0.25);
+    text-align: right;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Pizza SVG background */
+  .hero-pizza-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(192,57,43,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 30% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Procopio's</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specialties">Specialties</a></li>
+    <li><a href="#info">Hours & Info</a></li>
+    <li><a href="tel:+18128820914" class="nav-cta">Reserve a Table</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pizza-bg"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Vincennes, Indiana · Est. 2006</p>
+    <h1>Authentic<br>Italian <em>Heart &<br>Soul</em></h1>
+    <p class="hero-desc">Family-owned since 2006. All pasta imported from Italy. Every dish made with love in the heart of downtown Vincennes.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Explore the Menu</a>
+      <a href="#info" class="btn-outline">Find Us</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Pizza visual using SVG since no image file -->
+    <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;object-fit:cover;">
+      <defs>
+        <radialGradient id="pizzaBg" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="#3d1a0a"/>
+          <stop offset="100%" stop-color="#0e0b05"/>
+        </radialGradient>
+        <radialGradient id="crust" cx="50%" cy="50%" r="50%">
+          <stop offset="70%" stop-color="#c9874a"/>
+          <stop offset="100%" stop-color="#8b4e1c"/>
+        </radialGradient>
+        <radialGradient id="sauce" cx="50%" cy="50%" r="45%">
+          <stop offset="0%" stop-color="#c0392b"/>
+          <stop offset="100%" stop-color="#922b21"/>
+        </radialGradient>
+        <radialGradient id="cheese" cx="50%" cy="50%" r="40%">
+          <stop offset="0%" stop-color="#f5d88a"/>
+          <stop offset="100%" stop-color="#e0b84e"/>
+        </radialGradient>
+      </defs>
+      <rect width="600" height="700" fill="url(#pizzaBg)"/>
+      <!-- Steam lines -->
+      <g opacity="0.3" stroke="#f5d88a" stroke-width="2" fill="none">
+        <path d="M280 120 Q275 100 280 80 Q285 60 280 40" stroke-dasharray="3,4"/>
+        <path d="M300 110 Q295 90 300 70 Q305 50 300 30" stroke-dasharray="3,4"/>
+        <path d="M320 120 Q325 100 320 80 Q315 60 320 40" stroke-dasharray="3,4"/>
+      </g>
+      <!-- Pizza -->
+      <circle cx="300" cy="400" r="240" fill="url(#crust)" opacity="0.95"/>
+      <circle cx="300" cy="400" r="210" fill="url(#sauce)"/>
+      <circle cx="300" cy="400" r="200" fill="url(#cheese)" opacity="0.85"/>
+      <!-- Pepperoni -->
+      <circle cx="280" cy="340" r="28" fill="#8b1a1a" opacity="0.9"/>
+      <circle cx="280" cy="340" r="24" fill="#c0392b" opacity="0.85"/>
+      <circle cx="340" cy="390" r="28" fill="#8b1a1a" opacity="0.9"/>
+      <circle cx="340" cy="390" r="24" fill="#c0392b" opacity="0.85"/>
+      <circle cx="250" cy="420" r="26" fill="#8b1a1a" opacity="0.9"/>
+      <circle cx="250" cy="420" r="22" fill="#c0392b" opacity="0.85"/>
+      <circle cx="330" cy="450" r="27" fill="#8b1a1a" opacity="0.9"/>
+      <circle cx="330" cy="450" r="23" fill="#c0392b" opacity="0.85"/>
+      <circle cx="290" cy="480" r="25" fill="#8b1a1a" opacity="0.9"/>
+      <circle cx="290" cy="480" r="21" fill="#c0392b" opacity="0.85"/>
+      <circle cx="360" cy="340" r="26" fill="#8b1a1a" opacity="0.9"/>
+      <circle cx="360" cy="340" r="22" fill="#c0392b" opacity="0.85"/>
+      <!-- Cheese bubbles -->
+      <circle cx="260" cy="370" r="18" fill="#f5e9b0" opacity="0.5"/>
+      <circle cx="310" cy="430" r="14" fill="#f5e9b0" opacity="0.45"/>
+      <circle cx="370" cy="420" r="16" fill="#f5e9b0" opacity="0.4"/>
+      <circle cx="230" cy="460" r="12" fill="#f5e9b0" opacity="0.4"/>
+      <!-- Decorative gold ring -->
+      <circle cx="300" cy="400" r="242" fill="none" stroke="#c9a84c" stroke-width="2" opacity="0.3"/>
+      <!-- Herbs -->
+      <g fill="#2d6a2d" opacity="0.7">
+        <ellipse cx="295" cy="355" rx="6" ry="3" transform="rotate(-30 295 355)"/>
+        <ellipse cx="365" cy="460" rx="5" ry="2.5" transform="rotate(20 365 460)"/>
+        <ellipse cx="240" cy="400" rx="6" ry="3" transform="rotate(45 240 400)"/>
+      </g>
+      <!-- Vignette overlay -->
+      <radialGradient id="vignette" cx="50%" cy="50%" r="65%">
+        <stop offset="0%" stop-color="transparent"/>
+        <stop offset="100%" stop-color="#0e0b05" stop-opacity="0.7"/>
+      </radialGradient>
+      <rect width="600" height="700" fill="url(#vignette)"/>
+    </svg>
+    <div class="hero-badge">
+      <div class="hero-badge-inner">
+        <div class="num">#1</div>
+        <div class="label">Vincennes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip">
+  <div class="strip-item">
+    <div class="strip-num">2006</div>
+    <div class="strip-label">Est. Downtown Vincennes</div>
+    <div class="strip-desc">Family owned & operated</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-num">4.5★</div>
+    <div class="strip-label">TripAdvisor Rating</div>
+    <div class="strip-desc">Ranked #1 of 56 restaurants</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-num">100%</div>
+    <div class="strip-label">Italian Imported Pasta</div>
+    <div class="strip-desc">Authentic recipes, every time</div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-ornament">✦ ✦ ✦</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- MENU SECTION -->
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <p class="section-eyebrow">Crafted with love</p>
+    <h2 class="section-title">Our <em>Menu</em></h2>
+    <p class="section-sub">From classic Italian favorites to Procopio's signature creations</p>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="menu-card-icon">🥗</div>
+      <div class="menu-card-title">Appetizers & Salads</div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Bruschetta</div>
+          <div class="menu-item-desc">Diced tomatoes, olive oil, garlic & balsamic</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Bosco Sticks</div>
+          <div class="menu-item-desc">Mozzarella breadsticks, garlic butter, parmesan</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Toasted Ravioli</div>
+          <div class="menu-item-desc">Beef-filled, deep fried, meat or pizza sauce</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Zucchini Sticks</div>
+          <div class="menu-item-desc">Italian breaded, fried, served with sauce</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Greek Salad</div>
+          <div class="menu-item-desc">A Procopio's fan favorite</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-icon">🍝</div>
+      <div class="menu-card-title">Signature Pastas</div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Pasta Rosa</div>
+          <div class="menu-item-desc">Alfredo + meat sauce, ham & mushrooms — house specialty</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Mediterranean Pasta</div>
+          <div class="menu-item-desc">Linguine, clams, mussels, squid & shrimp</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Fettuccine Alfredo</div>
+          <div class="menu-item-desc">Classic creamy alfredo, imported pasta</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Baked Spaghetti</div>
+          <div class="menu-item-desc">Meat sauce, melted mozzarella</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Cheese & Meat Tortellini</div>
+          <div class="menu-item-desc">Alfredo, imported from Italy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-icon">🍕</div>
+      <div class="menu-card-title">Pizza</div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Stuffed Pizza</div>
+          <div class="menu-item-desc">Signature — mozzarella, seasoned beef, 5 layers</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">The Works</div>
+          <div class="menu-item-desc">Sausage, pepperoni, onion, mushroom, green pepper</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Build Your Own</div>
+          <div class="menu-item-desc">Fresh toppings, house-made sauce</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-icon">🥩</div>
+      <div class="menu-card-title">Entrées</div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Chicken Parmigiana</div>
+          <div class="menu-item-desc">Breaded & fried with your choice of pasta</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Eggplant Parmigiana</div>
+          <div class="menu-item-desc">Breaded cutlets, classic Italian style</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Lasagna</div>
+          <div class="menu-item-desc">House specialty, made fresh daily</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Steaks & Salmon</div>
+          <div class="menu-item-desc">Wed & Thu · 5–9 PM · With full menu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-icon">🥖</div>
+      <div class="menu-card-title">Sandwiches</div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Chicken Parmesan</div>
+          <div class="menu-item-desc">Classic on a toasted hoagie</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Italian Sausage Cacciatore</div>
+          <div class="menu-item-desc">House-made, slow simmered</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Little Italy Kids Menu</div>
+          <div class="menu-item-desc">Perfect for the youngest guests</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-icon">🍫</div>
+      <div class="menu-card-title">Desserts</div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Cannoli</div>
+          <div class="menu-item-desc">Sweet ricotta, cinnamon shell, chocolate chips</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Chocolate Mousse Pie</div>
+          <div class="menu-item-desc">Cookie crust, fudge, mousse, brownie layers</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Oreo Mousse Pie</div>
+          <div class="menu-item-desc">Buttery crust, chocolate & vanilla mousse</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Wine, Beer & Spirits</div>
+          <div class="menu-item-desc">Full bar service available</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPECIALTY SECTION -->
+<section class="specialty" id="specialties">
+  <div class="specialty-text">
+    <p class="specialty-label">What makes us different</p>
+    <h2 class="specialty-title">More Than a<br><span>Pizza Place</span></h2>
+    <p class="specialty-body">
+      Procopio and Kristen Palazzolo started this restaurant in 2006 with one mission: bring the true taste of Italy to Vincennes. Every strand of pasta is imported directly from Italy. Every sauce is made in-house, every day.
+    </p>
+    <p class="specialty-body">
+      Recognized on <strong>Indiana Foodways Alliance's Za Pizza Trail</strong> and <strong>Cultural Cuisine Trail</strong> — Procopio's is a statewide treasure rooted right here in Knox County.
+    </p>
+    <a href="tel:+18128820914" class="btn-primary" style="display:inline-block; margin-top:1rem;">
+      Call to Reserve
+    </a>
+  </div>
+  <div class="specialty-visual">
+    <div class="specialty-box">
+      <div class="specialty-box-title">⭐ Fan Favorites</div>
+      <ul class="specialty-list">
+        <li>Stuffed Pizza — the signature dish</li>
+        <li>Pasta Rosa — house blend of alfredo & meat sauce</li>
+        <li>Mediterranean Linguine — seafood in garlic white wine</li>
+        <li>Bruschetta & Bosco Sticks</li>
+        <li>Greek Salad — always a crowd-pleaser</li>
+        <li>Lobster, Shrimp & Scallop Ravioli</li>
+        <li>Chocolate Mousse Pie</li>
+        <li>Fresh Cannoli — made in house</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TRAIL RECOGNITION -->
+<div class="trail-section">
+  <div class="trail-icon">🏅</div>
+  <div class="trail-text">
+    <h3>Indiana Culinary Trail Recognized</h3>
+    <p>Featured on the Indiana Foodways Alliance Za Pizza Trail & Cultural Cuisine Trail</p>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="section-header">
+    <p class="section-eyebrow">What our guests say</p>
+    <h2 class="section-title">Loved by <em>Vincennes</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Hands down the best Italian restaurant in Indiana. Family owned, clean, nice. Food is OUT OF THIS WORLD. A must try if you're in Vincennes."</p>
+      <div class="review-author">— Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Meat sauce meets Alfredo sauce and becomes Rosa Sauce! Very tasty, authentic Italian food served warmly in a neat little local spot!"</p>
+      <div class="review-author">— TripAdvisor · Ranked #1 in Vincennes</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Our favorite local eatery. The atmosphere is modern, relaxing and a touch of elegance. The owner's personal touch makes every visit special."</p>
+      <div class="review-author">— Yelp Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO / HOURS -->
+<section class="info-section" id="info">
+  <div class="info-block">
+    <h2 class="info-title">Hours</h2>
+    <ul class="hours-list">
+      <li><span class="day">Monday</span><span class="closed">Closed</span></li>
+      <li><span class="day">Tuesday</span><span class="time">11:00 AM – 9:00 PM</span></li>
+      <li><span class="day">Wednesday</span><span class="time">11:00 AM – 9:00 PM</span></li>
+      <li><span class="day">Thursday</span><span class="time">11:00 AM – 9:00 PM</span></li>
+      <li><span class="day">Friday</span><span class="time">11:00 AM – 10:00 PM</span></li>
+      <li><span class="day">Saturday</span><span class="time">11:00 AM – 10:00 PM</span></li>
+      <li><span class="day">Sunday</span><span class="time">11:00 AM – 9:00 PM</span></li>
+    </ul>
+    <p style="font-size:0.8rem;color:rgba(245,240,232,0.4);margin-top:1.5rem;font-style:italic;">
+      * Steaks, pork chops & salmon available Wed–Thu, 5–9 PM
+    </p>
+  </div>
+  <div class="info-block">
+    <h2 class="info-title">Find Us</h2>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Address</div>
+          <div class="contact-value">127 N 2nd Street<br>Vincennes, IN 47591</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:+18128820914">(812) 882-0914</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:Maeder4@yahoo.com">Maeder4@yahoo.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">Follow Along</div>
+          <div class="contact-value">
+            <a href="https://www.facebook.com/procopiospizzaandpasta/" target="_blank">Facebook — @procopiospizzaandpasta</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🍽️</div>
+        <div>
+          <div class="contact-label">Service</div>
+          <div class="contact-value">Dine-In · Takeout · Delivery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Procopio's Pizza & Pasta</div>
+    <div class="footer-tagline">Authentic Italian in the Heart of Vincennes since 2006</div>
+  </div>
+  <div class="footer-copy">
+    127 N 2nd St · Vincennes, IN 47591<br>
+    (812) 882-0914
+  </div>
+</footer>
+
+</body>
+</html>
